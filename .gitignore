@@ -51,3 +51,7 @@ firebase.json
 /.editorconfig
 /firebase.json
 /browserslist
+/.firebaserc
+/database.rules.json
+/firestore.indexes.json
+/firestore.rules
