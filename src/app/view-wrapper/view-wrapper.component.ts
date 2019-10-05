@@ -9,7 +9,16 @@ export class ViewWrapperComponent implements OnInit {
 
   constructor() { }
 
+
+  private menino: string;
+
+
   ngOnInit() {
+    this.willy();
+  }
+
+  public willy() {
+    console.log('menino willy');
   }
 
 }
