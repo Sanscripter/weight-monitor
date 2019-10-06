@@ -55,3 +55,5 @@ firebase.json
 /database.rules.json
 /firestore.indexes.json
 /firestore.rules
+/src/environments/env-prod.enum.ts
+/src/environments/env-dev.enum.ts

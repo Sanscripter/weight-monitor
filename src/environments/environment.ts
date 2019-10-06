@@ -1,9 +1,22 @@
+import { EnvDev as env } from './env-dev.enum';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: env.FIREBASE_APIKEY,
+    authDomain: env.FIREBASE_AUTHDOMAIN,
+    databaseURL: env.FIREBASE_DATABASEURL,
+    projectId: env.FIREBASE_PROJECTID,
+    storageBucket: env.FIREBASE_STORAGEBUCKET,
+    messagingSenderId: env.FIREBASE_MESSAGINGSENDERID,
+    appId: env.FIREBASE_APPID,
+    measurementId: env.FIREBASE_MEASUREMENTID,
+  }
 };
 
 /*
