@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { FirebaseService } from './firebase.service';
+import { WeightsService } from './weights.service';
 
 describe('Service: Firebase', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FirebaseService]
+      providers: [WeightsService]
     });
   });
 
-  it('should ...', inject([FirebaseService], (service: FirebaseService) => {
+  it('should ...', inject([WeightsService], (service: WeightsService) => {
     expect(service).toBeTruthy();
   }));
 });
