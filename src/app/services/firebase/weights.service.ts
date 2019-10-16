@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { WeightModel } from 'src/app/models/weight-model';
 
@@ -9,34 +9,45 @@ import { WeightModel } from 'src/app/models/weight-model';
 })
 export class WeightsService {
 
-  weightsCollection: AngularFirestoreCollection<WeightModel>;
-  weights: Observable<WeightModel[]>;
-
   constructor(public db: AngularFirestore) {
-    this.weights = db.collection('weights').snapshotChanges().pipe(
-      map(changes => {
-      return changes.map(c => {
-        const weight = c.payload.doc.data() as WeightModel;
-        weight.id = c.payload.doc.id;
-        return weight;
-      });
-    }));
+    this.weights = this.collection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(change => {
+          const weight = change.payload.doc.data() as WeightModel;
+          weight.id = change.payload.doc.id;
+          return weight;
+        });
+      }));
   }
 
-  public getWeightList() {
-    return this.weights;
+  private weightsCollection: AngularFirestoreCollection<WeightModel>;
+  private weights: Observable<WeightModel[]>;
+  private collection = this.db.collection('weights');
+
+  public getListUserList(user: any): Observable<Array<WeightModel>> {
+    const list = [];
+    const resultSnapshot =  this.db.collection('weights', ref => ref.where('user', '==', user.email))
+      .snapshotChanges()
+      .pipe(flatMap(weights => weights));
+    resultSnapshot.subscribe(dbDoc => {
+      list.push(dbDoc.payload.doc.data());
+    });
+    return of(list);
   }
 
-  // public insertWeight(weight: WeightModel): AngularFirestoreDocument {
-  //   return <AngularFirestoreDocument>this.db.collection('weights').add({
-  //     user: weight.user,
-  //     date: weight.date,
-  //     value: weight.value
-  //   })
-  // }
+  public add(weight: WeightModel) {
+    this.collection.add(weight);
+    return true;
+  }
 
-  // public getWeights(user: UserModel): Observable<WeightModel[]>{
-  //   return <Observable<WeightModel[]>>of(this.db.collection('weights').get()) 
-  // }
+  public get(id: string) {
+    const weightDoc = this.db.doc(`weights/${id}`);
+    const weight = weightDoc.valueChanges();
+    return weight;
+  }
+
+  public delete(id: string) {
+    this.db.doc(`weights/${id}`).delete();
+  }
 
 }
