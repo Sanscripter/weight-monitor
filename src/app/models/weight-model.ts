@@ -1,9 +1,9 @@
-export class WeightModel {
+export interface WeightModel {
 
-    public $key?: string;
-    public id: string;
-    public user?: string;
-    public value?: number;
-    public date?: Date;
-    public active?: boolean;
+    $key?: string;
+    id: string;
+    user?: string;
+    value?: number;
+    date?: Date;
+    active?: boolean;
 }
