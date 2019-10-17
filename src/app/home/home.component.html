@@ -1,8 +1,10 @@
-<div class="row">
-  <div class="col">
-    hi
+<div class="root">
+  <div class="row">
+    <div class="col">
+      hi
+    </div>
   </div>
-</div>
-<div *ngFor="let weight of weights" class="row">
-    <span>{{weight.value}}</span>
+  <div *ngFor="let weight of weights" class="row">
+      <span (click)="deleteWeight(weight.$key)">{{weight.value}}</span>
+  </div>
 </div>
