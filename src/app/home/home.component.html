@@ -1,10 +1,17 @@
+<div class="modal">
+
+</div>
 <div class="root">
   <div class="row">
-    <div class="col">
-      hi
+    <div class="card offset-1 col-sm-10 round-edges pt-2">
+      <div *ngFor="let weight of weights" class="row m-0 data-line">
+          <div class="col" (click)="editWeight(weight)">
+            <div class="row p-3 pt-0">
+              <p class="weight-value col-sm-6">{{weight.value | number : '1.1-1' }}</p>
+              <p class="date-value col-sm-6">{{weight.date.toDate() | date : 'longDate'}}</p>
+            </div>
+          </div>
+      </div>
     </div>
-  </div>
-  <div *ngFor="let weight of weights" class="row">
-      <span (click)="deleteWeight(weight.$key)">{{weight.value}}</span>
   </div>
 </div>

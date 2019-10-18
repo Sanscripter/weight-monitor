@@ -14,11 +14,8 @@ export class ViewWrapperComponent implements OnInit {
 
 
   ngOnInit() {
-    this.willy();
+
   }
 
-  public willy() {
-    console.log('menino willy');
-  }
 
 }
