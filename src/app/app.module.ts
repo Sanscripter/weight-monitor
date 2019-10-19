@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       HomeComponent,
       PageNotFoundComponent,
-      ViewWrapperComponent
+      ViewWrapperComponent,
+      ChartComponent
    ],
    imports: [
       BrowserModule,
