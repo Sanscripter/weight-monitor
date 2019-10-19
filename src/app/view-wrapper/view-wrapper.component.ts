@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-view-wrapper',
   templateUrl: './view-wrapper.component.html',
@@ -8,10 +7,6 @@ import { Component, OnInit } from '@angular/core';
 export class ViewWrapperComponent implements OnInit {
 
   constructor() { }
-
-
-  private menino: string;
-
 
   ngOnInit() {
 
