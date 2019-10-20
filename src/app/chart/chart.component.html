@@ -1,3 +1,13 @@
-<div class="row chart card round-edges m-md-3">
-
+<div class="row chart-card card round-edges m-md-3">
+  <div *ngIf="chartWeightData" class="chart-container">
+    <canvas baseChart
+              [datasets]="chartWeightData" 
+              [labels]="chartWeightLabels"
+              [options]="chartWeightOptions" 
+              [colors]="chartWeightColors" 
+              [legend]="chartWeightLegend" 
+              [chartType]="chartWeightType"
+              [plugins]="chartWeightPlugins">
+    </canvas>
+  </div>
 </div>
