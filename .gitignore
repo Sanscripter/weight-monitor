@@ -58,3 +58,4 @@ firebase.json
 /firestore.rules
 /src/environments/env-prod.enum.ts
 /src/environments/env-dev.enum.ts
+/package-lock.json
