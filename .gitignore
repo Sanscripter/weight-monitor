@@ -45,7 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 build
-package-lock.json
 .firebase/
 firebase.json
 .firebaseserc
