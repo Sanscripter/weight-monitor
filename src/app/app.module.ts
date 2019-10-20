@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AppRoutingModule } from './app-routing.module';
+import { ChartsModule } from 'ng2-charts';
+
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
 import { ChartComponent } from './chart/chart.component';
@@ -15,7 +17,7 @@ import { ChartComponent } from './chart/chart.component';
 @NgModule({
    declarations: [
       AppComponent,
-      HomeComponent,
+      DashboardComponent,
       PageNotFoundComponent,
       ViewWrapperComponent,
       ChartComponent
@@ -25,7 +27,8 @@ import { ChartComponent } from './chart/chart.component';
       AppRoutingModule,
       NgbModule,
       AngularFireModule.initializeApp(environment.firebase),
-      AngularFirestoreModule
+      AngularFirestoreModule,
+      ChartsModule
    ],
    providers: [],
    bootstrap: [

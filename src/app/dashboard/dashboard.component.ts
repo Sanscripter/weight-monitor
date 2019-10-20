@@ -4,11 +4,11 @@ import { WeightModel } from '../models/weight-model';
 import { WeightsService } from '../services/firebase/weights.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   public weights: WeightModel[];
   private user = {
     email: 'otheruser@example.com'
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private weightsService: WeightsService) { }
 
   ngOnInit() {
-    this.weightsService.getListUserList(this.user).subscribe(data => {
+    this.weightsService.getUserWeights(this.user).subscribe(data => {
       this.weights = data.sort((a, b) => {
         return a.date > b.date ? 1 : -1;
       });

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'charts', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'charts', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
   {
     path: 'goals',
-    component: HomeComponent,
+    component: DashboardComponent,
     data: {
       title: 'Goals'
     }
