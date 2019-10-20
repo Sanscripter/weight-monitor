@@ -43,8 +43,9 @@ testem.log
 
 # System Files
 .DS_Store
-Thumbs.db]
+Thumbs.db
 build
+package-lock.json
 .firebase/
 firebase.json
 .firebaseserc
