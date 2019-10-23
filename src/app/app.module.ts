@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule  } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 
@@ -32,6 +33,7 @@ import { LoginComponent } from './login/login.component';
       NgbModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule,
+      AngularFireAuthModule,
       ChartsModule
    ],
    providers: [],
