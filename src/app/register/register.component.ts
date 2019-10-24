@@ -15,11 +15,11 @@ export class RegisterComponent implements OnInit {
   public user: UserModel;
   private registrationForm: FormGroup;
   private error: string;
+  private submitted: boolean;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private userService: UsersService,
-              private authenticationService: AuthenticationService
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {
     if (this.authenticationService.currentUser) {
       this.router.navigate(['/home']);
@@ -29,17 +29,21 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
-      name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
+  public submitRegistration(){
+    this.register();
+  }
+
   private register() {
-    if (!this.registrationForm.valid) {
-      this.user.creationDate = new Date();
-      this.userService.add(this.user);
+    const userMock = {
+      email: "allenmasrara3@hotmail.com",
+      password: "11111111"
     }
+    this.authenticationService.register(userMock);
   }
 
 }
