@@ -4,7 +4,7 @@ Simple weight tracker written with Angular with Firebase.
 
 # Motivation
 
-There simply wasn't any one tool that would satisfy my  needs of logging weights, charting them, setting goals, sending notifications, syncing with google fit and  performing simple projections.
+There simply wasn't any one tool that would satisfy my  needs of logging weights, charting them, setting goals, sending notifications, syncing with google fit and performing simple projections.
 
 # Roadmap
 
