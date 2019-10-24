@@ -29,6 +29,8 @@ export class UsersService {
         }));
   }
 
+  // public find(user: UserModel)
+
   public add(user: UserModel) {
     this.collection.add(user);
     return true;

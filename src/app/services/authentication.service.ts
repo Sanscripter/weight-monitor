@@ -3,7 +3,7 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { UserModel } from '../models/user-model';
 import { UsersService } from './firebase/users.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RegistrationModel as SessionHolderModel } from '../models/registration-model';
+import { RegistrationModel as SessionHolderModel } from '../models/sessionholder-model';
 
 @Injectable({
   providedIn: 'root'
