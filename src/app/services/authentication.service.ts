@@ -23,18 +23,19 @@ export class AuthenticationService {
   }
 
   public login(loginData: SessionHolderModel) {
-    this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password).then(() => {
-      return "Success";
+    this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password).then((data) => {
+      console.log(data);
     }).catch(response => {
       return response.message;
     });
   }
 
   public register(registrationData: SessionHolderModel) {
-    this.afAuth.auth.createUserWithEmailAndPassword(registrationData.email, registrationData.password).then(() => {
-      return "Success";
+    this.afAuth.auth.createUserWithEmailAndPassword(registrationData.email, registrationData.password).then((data) => {
+      console.log(data);
     }).catch(response => {
-      return response.message;
+      console.log(response);
+
     });
   }
 

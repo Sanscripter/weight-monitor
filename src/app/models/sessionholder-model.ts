@@ -1,4 +1,4 @@
-export interface RegistrationModel {
+export interface SessionHolderModel {
     email?: string;
     password?: string;
 }

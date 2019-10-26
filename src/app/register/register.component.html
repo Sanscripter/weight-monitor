@@ -1,21 +1,23 @@
-<div class="row card round-edges m-md-3">
-    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">Email is required</div>
+<div class="row wrapper">
+    <div class="col-xs-4 offset-xs-4 col-sm-4 offset-sm-4 card round-edges p-3">
+        <form [formGroup]="registrationForm"  class="p-3" (ngSubmit)="submitRegistration()">
+            <div class="form-group row">
+                <div class="col p-2">
+                    <label for="email">Email</label>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
+            <div class="form-group row">
+                <div class="col p-2">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-link">Register</button>
-        </div>
-    </form>
+            <div class="form-group row">
+                <div class="col-sm-12 pt-5">
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

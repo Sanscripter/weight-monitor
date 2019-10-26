@@ -16,6 +16,7 @@ import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
 import { ChartComponent } from './chart/chart.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
    declarations: [
@@ -34,7 +35,9 @@ import { LoginComponent } from './login/login.component';
       AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule,
       AngularFireAuthModule,
-      ChartsModule
+      ChartsModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [],
    bootstrap: [

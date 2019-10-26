@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/firebase/users.service';
-import { UserModel } from '../models/user-model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { SessionHolderModel as RegistrationModel } from '../models/sessionholder-model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
-  public user: UserModel;
+  private registrationModel: RegistrationModel;
   private registrationForm: FormGroup;
+  private formSubscription: Subscription;
   private error: string;
   private submitted: boolean;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private authenticationService: AuthenticationService
+              private router: Router,
+              private authenticationService: AuthenticationService
   ) {
-    if (this.authenticationService.currentUser) {
-      this.router.navigate(['/home']);
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -32,18 +33,17 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.formSubscription = this.registrationForm.valueChanges
+      .subscribe(data => this.registrationModel = data);
   }
 
-  public submitRegistration(){
-    this.register();
+  public submitRegistration() {
+    this.authenticationService.register(this.registrationModel);
   }
 
-  private register() {
-    const userMock = {
-      email: "allenmasrara3@hotmail.com",
-      password: "11111111"
-    }
-    this.authenticationService.register(userMock);
+  ngOnDestroy() {
+    this.formSubscription.unsubscribe();
   }
 
 }
