@@ -24,7 +24,7 @@ export class WeightsService {
         map(actions => {
           return actions.map(change => {
             const weight = change.payload.doc.data() as WeightModel;
-            weight.date = change.payload.doc.data().date.toDate();
+            weight.date = weight.date.toDate();
             weight.id = change.payload.doc.id;
             weight.$key = change.payload.doc.id;
             return weight;

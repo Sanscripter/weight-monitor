@@ -4,6 +4,6 @@ export interface WeightModel {
     id?: string;
     user?: string;
     value?: number;
-    date?: Date;
+    date?: any;
     active?: boolean;
 }

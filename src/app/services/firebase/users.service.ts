@@ -21,7 +21,7 @@ export class UsersService {
         map(actions => {
           return actions.map(change => {
             const userItem = change.payload.doc.data() as UserModel;
-            userItem.creationDate = change.payload.doc.data().creationDate.toDate();
+            userItem.creationDate = userItem.creationDate.toDate();
             userItem.id = change.payload.doc.id;
             userItem.$key = change.payload.doc.id;
             return user;
