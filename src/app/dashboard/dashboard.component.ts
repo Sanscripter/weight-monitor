@@ -13,45 +13,39 @@ import { SessionHolderModel } from '../models/sessionholder-model';
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public weights: WeightModel[];
-  private sessionHolder: SessionHolderModel;
+  public sessionHolder: SessionHolderModel;
   private sessionSubscription: Subscription;
-
-  //Temporary data mock
-  private user = {
-    email: 'otheruser@example.com'
-  };
 
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
               private weightsService: WeightsService) {
-
-    // if (!this.authenticationService.currentUserValue.email) {
-    //     this.router.navigate(['/login']);
-    // }
   }
 
   ngOnInit() {
-    this.weightsService.getUserWeights(this.user).subscribe(data => {
-      this.weights = data;
-    });
     this.sessionSubscription = this.authenticationService.currentUser.subscribe(value => {
-      if (!value.email) {
+      if (!value || !value.email) {
         this.router.navigate(['/login']);
+        return;
       }
+      this.sessionHolder = value;
+    });
+    this.weightsService.getUserWeights(this.sessionHolder).subscribe(data => {
+      this.weights = data;
     });
   }
 
   ngAfterViewInit(): void {
     //Populating with mocks....
 
-    const newWeight = {
-      value: Math.random() * 100 + 70,
-      user: this.user.email,
-      date: new Date(),
-      active: true
-    };
+    // const newWeight = {
+    //   value: Math.random() * 100 + 70,
+    //   user: this.sessionHolder.email,
+    //   date: new Date(),
+    //   active: true
+    // };
+    // this.weightsService.add(newWeight);
 
-    this.weightsService.add(newWeight);
+    //NOTE: I KNOW THIS IS UGLY I JUST WANT TO PUT IT ONLINE FOR TESTERS BUT DON'T WANT TO LOSE IT
   }
 
   ngOnDestroy() {

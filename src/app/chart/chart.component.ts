@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label} from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 import { WeightsService } from '../services/firebase/weights.service';
 import { WeightModel } from '../models/weight-model';
 import * as moment from 'moment';
 import { HelperService } from '../services/_helper.service';
+import { UserModel } from '../models/user-model';
 
 
 
@@ -15,12 +16,12 @@ import { HelperService } from '../services/_helper.service';
 })
 export class ChartComponent implements OnInit {
 
+  @Input()
+  user: UserModel;
+
   constructor(private weightService: WeightsService,
               private helperService: HelperService) { }
 
-  private user = {
-    email: 'otheruser@example.com'
-  };
   private weightList: WeightModel[];
   private chartWeightData: ChartDataSets[] = [{ data: [] }];
   public chartWeightLabels: Label[] = [];

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private loginForm: FormGroup;
   private formSubscription: Subscription;
   private sessionSubscription: Subscription;
+  private currentUserSubscription: Subscription;
   private error: string;
   private submitted: boolean;
 
@@ -23,9 +24,11 @@ export class LoginComponent implements OnInit, OnDestroy {
               private router: Router,
               private authenticationService: AuthenticationService
   ) {
-    // if (this.authenticationService.currentUserValue.email) {
-    //   this.router.navigate(['/dashboard']);
-    // }
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(val => {
+      if (val && val.email) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
   ngOnInit() {
@@ -36,12 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.formSubscription = this.loginForm.valueChanges
       .subscribe(data => this.loginModel = data);
-
-    this.sessionSubscription = this.authenticationService.currentUser.subscribe(value => {
-      if (value.email) {
-        this.router.navigate(['/dashboard']);
-      }
-    });
   }
 
   public submitLogin() {
@@ -54,6 +51,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     if (this.sessionSubscription) {
       this.sessionSubscription.unsubscribe();
+    }
+    if (this.currentUserSubscription) {
+      this.currentUserSubscription.unsubscribe();
     }
   }
 

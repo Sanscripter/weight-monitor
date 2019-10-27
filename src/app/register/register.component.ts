@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private registrationModel: RegistrationModel;
   private registrationForm: FormGroup;
   private formSubscription: Subscription;
+  private currentUserSubscription: Subscription;
   private error: string;
   private submitted: boolean;
 
@@ -22,9 +23,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
               private router: Router,
               private formBuilder: FormBuilder
   ) {
-    if (this.authenticationService.currentUser.value.email) {
-      this.router.navigate(['/dashboard']);
-    }
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(val => {
+      console.log('value changed');
+      console.log(val);
+      if (val && val.email ) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
 
@@ -44,6 +49,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
+    this.currentUserSubscription.unsubscribe();
   }
 
 }
