@@ -12,8 +12,8 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  public loginForm: FormGroup;
   private loginModel: LoginModel;
-  private loginForm: FormGroup;
   private formSubscription: Subscription;
   private sessionSubscription: Subscription;
   private currentUserSubscription: Subscription;

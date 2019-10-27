@@ -17,6 +17,8 @@ import { ChartComponent } from './chart/chart.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { GoalsViewComponent } from './goals-view/goals-view.component';
+import { GoalsComponent } from './goals-view/goals/goals.component';
 
 @NgModule({
    declarations: [
@@ -27,7 +29,8 @@ import { LoginComponent } from './login/login.component';
       ChartComponent,
       RegisterComponent,
       LoginComponent,
-      LoginComponent
+      GoalsComponent,
+      GoalsViewComponent
    ],
    imports: [
       BrowserModule,

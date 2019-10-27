@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
+  public registrationForm: FormGroup;
   private registrationModel: RegistrationModel;
-  private registrationForm: FormGroup;
   private formSubscription: Subscription;
   private currentUserSubscription: Subscription;
   private error: string;

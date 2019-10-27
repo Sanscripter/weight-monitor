@@ -22,8 +22,8 @@ export class ChartComponent implements OnInit {
   constructor(private weightService: WeightsService,
               private helperService: HelperService) { }
 
-  private weightList: WeightModel[];
-  private chartWeightData: ChartDataSets[] = [{ data: [] }];
+  public weightList: WeightModel[];
+  public chartWeightData: ChartDataSets[] = [{ data: [] }];
   public chartWeightLabels: Label[] = [];
 
   public chartWeightOptions: (ChartOptions) = {
