@@ -3,30 +3,31 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { UserModel } from '../models/user-model';
 import { UsersService } from './firebase/users.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RegistrationModel as SessionHolderModel } from '../models/sessionholder-model';
+import { SessionHolderModel } from '../models/sessionholder-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<UserModel>;
-  private currentUser: Observable<UserModel>;
+  public currentUser = new BehaviorSubject<SessionHolderModel>({});
 
   constructor(private afAuth: AngularFireAuth) {
-    this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue() {
-    return this.currentUserSubject.value;
+    this.afAuth.auth.setPersistence(`local`);
   }
 
   public login(loginData: SessionHolderModel) {
     this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password).then((data) => {
-      console.log(data);
+      const sessionHolderData: SessionHolderModel = { email: data.user.email };
+      this.currentUser.next(sessionHolderData);
     }).catch(response => {
-      return response.message;
+      console.log(response);
+    });
+  }
+
+  public logout() {
+    this.afAuth.auth.signOut().then(() =>{
+      this.currentUser.next({});
     });
   }
 
@@ -35,7 +36,6 @@ export class AuthenticationService {
       console.log(data);
     }).catch(response => {
       console.log(response);
-
     });
   }
 

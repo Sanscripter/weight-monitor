@@ -18,11 +18,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private error: string;
   private submitted: boolean;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private authenticationService: AuthenticationService,
               private router: Router,
-              private authenticationService: AuthenticationService
+              private formBuilder: FormBuilder
   ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentUser.value.email) {
       this.router.navigate(['/dashboard']);
     }
   }

@@ -15,8 +15,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
 import { ChartComponent } from './chart/chart.component';
 import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
    declarations: [
@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       ViewWrapperComponent,
       ChartComponent,
       RegisterComponent,
+      LoginComponent,
       LoginComponent
    ],
    imports: [

@@ -70,7 +70,7 @@ export class ChartComponent implements OnInit {
     this.weightList.forEach(weightData => {
       const formatDate = moment(weightData.date);
       this.chartWeightData[0].data.push(weightData.value);
-      this.chartWeightLabels.push(formatDate);
+      this.chartWeightLabels.push(formatDate.toLocaleString());
     });
   }
 }
