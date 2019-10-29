@@ -62,6 +62,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.weightsService.update(weight);
   }
 
+  public addWeight(weight: WeightModel) {
+    this.weightsService.add(weight);
+  }
+
   public logout() {
     this.authenticationService.logout();
   }

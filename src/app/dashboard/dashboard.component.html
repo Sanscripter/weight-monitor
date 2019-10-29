@@ -1,10 +1,8 @@
-<div class="modal">
-
-</div>
+<app-weight-modal (add)="addWeight($event)" (update)="updateWeight($event)"></app-weight-modal>
 <div class="root">
-  <div class="row">
+  <div class="row  m-md-3 mb-3">
     <span class="col-sm-4 simple-nav">Hello, <strong>{{sessionHolder.email}}</strong></span>
-    <button class="btn btn-primary col-sm-3 offset-5" (click)="logout()">Logout</button>
+    <button class="btn btn-primary col-sm-2 offset-6" (click)="logout()">Logout</button>
     <div class="">
     </div>
   </div>
@@ -12,6 +10,10 @@
     <h3 class="p-1 mb-4 section-title">Hallo und wilkommen!</h3>
   </div>
   <app-chart [user]="sessionHolder"></app-chart>
+  <div class="row m-md-3 mt-5">
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+    <button type="button" role="button" class="col-sm-2 offset-10 btn btn-success" data-target="#addWeightModal" data-toggle="modal" ><i class="fa fa-plus"></i></button>
+  </div>
   <div class="row m-md-3">
     <h3 class="p-1  my-4 section-title">Your weight history: </h3>
   </div>

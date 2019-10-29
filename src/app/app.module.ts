@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { GoalsViewComponent } from './goals-view/goals-view.component';
 import { GoalsComponent } from './goals-view/goals/goals.component';
+import { WeightModalComponent } from './weight-modal/weight-modal.component';
 
 @NgModule({
    declarations: [
@@ -30,7 +31,8 @@ import { GoalsComponent } from './goals-view/goals/goals.component';
       RegisterComponent,
       LoginComponent,
       GoalsComponent,
-      GoalsViewComponent
+      GoalsViewComponent,
+      WeightModalComponent
    ],
    imports: [
       BrowserModule,
