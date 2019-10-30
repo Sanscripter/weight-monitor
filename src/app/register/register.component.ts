@@ -24,8 +24,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
               private formBuilder: FormBuilder
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(val => {
-      console.log('value changed');
-      console.log(val);
       if (val && val.email ) {
         this.router.navigate(['/dashboard']);
       }
