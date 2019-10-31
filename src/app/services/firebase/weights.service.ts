@@ -35,7 +35,6 @@ export class WeightsService {
 
   public add(weight: WeightModel) {
     this.collection.add(weight);
-    return true;
   }
 
   public get(id: string) {

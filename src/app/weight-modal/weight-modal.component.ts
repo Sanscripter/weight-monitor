@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild  } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { WeightModel } from '../models/weight-model';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weight-modal',
@@ -9,33 +11,38 @@ import { WeightModel } from '../models/weight-model';
 })
 export class WeightModalComponent implements OnInit {
 
-  closeResult: string;
+  public weightForm: FormGroup;
+  private weightModel: WeightModel;
+  private formSubscription: Subscription;
 
-  @Output() add: EventEmitter<WeightModel> = new EventEmitter();
+  @Output() add = new EventEmitter<WeightModel>();
 
   @Output() update = new EventEmitter<WeightModel>();
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.weightForm =  this.formBuilder.group({
+      value: ['', Validators.required],
+      date: ['', Validators.required],
+    });
+
+    this.formSubscription = this.weightForm.valueChanges
+      .subscribe(data => this.weightModel = data);
   }
 
   public open(content) {
-    console.log(content);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      console.log(result);
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
     });
   }
-  public getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+
+  public addWeight() {
+    console.log(this.weightModel);
+    this.add.emit(this.weightModel);
   }
 
 }
