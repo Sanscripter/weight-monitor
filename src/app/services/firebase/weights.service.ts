@@ -7,7 +7,6 @@ import { UserModel } from 'src/app/models/user-model';
 import { HelperService } from '../_helper.service';
 import * as joi from '@hapi/joi';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +25,7 @@ export class WeightsService {
     value: joi.number().min(0).required(),
     date: joi.date().required(),
     active: joi.boolean().default(true),
-  })
+  });
 
   public getUserWeights(user: UserModel): Observable<Array<WeightModel>> {
     return this.db.collection('weights', ref => ref.where('user', '==', user.email).where('active', '==', true))
@@ -44,12 +43,11 @@ export class WeightsService {
   }
 
   public add(weight: WeightModel) {
-    const { error, value } = this.weightSchema.validate(weight);
+    const { error } = this.weightSchema.validate(weight);
     if (error) {
       console.log(error);
       return;
     }
-    console.log('value',value)
     this.collection.add(weight);
   }
 
@@ -60,6 +58,11 @@ export class WeightsService {
   }
 
   public update(weight: WeightModel) {
+    const { error } = this.weightSchema.validate(weight);
+    if (error) {
+      console.log(error);
+      return;
+    }
     this.db.doc(`weights/${weight.id}`).update(weight);
   }
 
