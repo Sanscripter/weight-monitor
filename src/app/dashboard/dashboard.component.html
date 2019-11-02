@@ -1,10 +1,14 @@
 <div class="root">
   <div class="row  m-md-3 mb-3">
     <span class="col-sm-4 simple-nav">Hello, <strong>{{sessionHolder.email}}</strong></span>
-    <button class="btn btn-primary col-sm-2 offset-6" (click)="logout()">Logout</button>
-    <div class="">
+    <div class="col-sm-2 offset-4">
+      <button class="btn btn-primary " (click)="logout()">Logout</button>
     </div>
-  </div>
+    <div class="col-sm-2 side-notes">
+      <p>Powered by:</p>
+      <img src="./assets/tropical-keltic-logo.svg" class="logo  tropicla-keltic">
+      </div>
+    </div>
   <div class="row m-md-3">
     <h3 class="p-1 mb-4 section-title">Hallo und wilkommen!</h3>
   </div>
