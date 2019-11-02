@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { WeightModel } from '../models/weight-model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weight-modal',
@@ -13,7 +12,8 @@ export class WeightModalComponent implements OnInit {
 
   public weightForm: FormGroup;
   private weightModel: WeightModel;
-  private formSubscription: Subscription;
+
+  @Input() weight: WeightModel;
 
   @Output() add = new EventEmitter<WeightModel>();
 
@@ -23,26 +23,31 @@ export class WeightModalComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.weightForm =  this.formBuilder.group({
+    this.initializeForm();
+  }
+
+  private initializeForm() {
+    this.weightForm = this.formBuilder.group({
       value: ['', Validators.required],
       date: ['', Validators.required],
     });
 
-    this.formSubscription = this.weightForm.valueChanges
-      .subscribe(data => this.weightModel = data);
   }
 
   public open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      console.log(result);
-    }, (reason) => {
-      console.log(reason);
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   public addWeight() {
-    console.log(this.weightModel);
-    this.add.emit(this.weightModel);
+    if (this.weightForm.valid) {
+      this.add.emit(this.weightModel);
+    }
+  }
+
+  public updateWeight() {
+    if (this.weightForm.valid) {
+      this.update.emit(this.weightModel);
+    }
   }
 
 }

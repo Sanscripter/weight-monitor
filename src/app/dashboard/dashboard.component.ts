@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SessionHolderModel } from '../models/sessionholder-model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -62,7 +63,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.weightsService.update(weight);
   }
 
-  public addWeight(weight: WeightModel) {
+  public addWeight(weight: WeightModel | any) {
+    weight.user = this.sessionHolder.email;
+    weight.date = moment(weight.date).toDate();
     this.weightsService.add(weight);
   }
 
