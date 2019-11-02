@@ -11,18 +11,25 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class WeightModalComponent implements OnInit {
 
   public weightForm: FormGroup;
-  private weightModel: WeightModel;
+  private weightModel: WeightModel = {};
 
   @Input() weight: WeightModel;
+
+  @Input() id: string;
 
   @Output() add = new EventEmitter<WeightModel>();
 
   @Output() update = new EventEmitter<WeightModel>();
 
+  @Output() delete = new EventEmitter<string>();
+
   constructor(private modalService: NgbModal,
-              private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    if (this.weight) {
+      this.weightModel = this.weight;
+    }
     this.initializeForm();
   }
 
@@ -39,6 +46,7 @@ export class WeightModalComponent implements OnInit {
   }
 
   public addWeight() {
+    console.log(this.weightForm.valid);
     if (this.weightForm.valid) {
       this.add.emit(this.weightModel);
     }
@@ -47,6 +55,12 @@ export class WeightModalComponent implements OnInit {
   public updateWeight() {
     if (this.weightForm.valid) {
       this.update.emit(this.weightModel);
+    }
+  }
+
+  public deleteWeight() {
+    if (this.id) {
+      this.delete.emit(this.id);
     }
   }
 

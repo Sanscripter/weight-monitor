@@ -10,7 +10,7 @@
   </div>
   <app-chart [user]="sessionHolder"></app-chart>
   <div class="row m-md-3 mt-5">
-    <div class="col">
+    <div class="offset-11 col">
       <app-weight-modal (add)="addWeight($event)"></app-weight-modal>
     </div>
   </div>
@@ -20,7 +20,7 @@
   <div class="row m-md-3">
     <div class="card col round-edges pt-2">
       <div *ngFor="let weight of weights" class="row m-2 data-line">
-        <div class="col" (click)="deleteWeight(weight.id)">
+        <div class="col">
           <div class="row">
             <div class="weight-value col-xs-4 col-4">
               <p>{{weight.value | number : '1.1-1' }}</p>
@@ -34,7 +34,7 @@
                   <app-weight-modal [weight]="weight" (update)="updateWeight($event)"></app-weight-modal>
                 </div>
                 <div class="col d-flex justify-content-start">
-                  <app-weight-modal [weight]="weight" (update)="updateWeight($event)"></app-weight-modal>
+                  <app-weight-modal [id]="weight.id" [weight]="weight" (delete)="deleteWeight($event)"></app-weight-modal>
                 </div>
               </div>
             </div>

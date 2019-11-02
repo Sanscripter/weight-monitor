@@ -1,33 +1,48 @@
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Weight</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="weightForm">
-        <div class="form-group">
-            <label for="weight-value">Weight</label>
-            <div class="input-group">
-              <input id="weight-value" class="form-control" placeholder="" [(ngModel)]="weightModel.value" formControlName="value">
-            </div>
-          <label for="date">Date</label>
-          <div class="input-group">
-            <input id="date" class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="weightModel.date" formControlName="date" ngbDatepicker #weightDate="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" (click)="weightDate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-            </div>
+  <div class="modal-header">
+    <h4 *ngIf="!weight && !id" class="modal-title" id="modal-basic-title">Add Weight</h4>
+    <h4 *ngIf="weight && !id" class="modal-title" id="modal-basic-title">Update Weight</h4>
+    <h4 *ngIf="weight && id" class="modal-title" id="modal-basic-title">Delete Weight</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="!id" [formGroup]="weightForm">
+      <div class="form-group">
+        <label for="weight-value">Weight</label>
+        <div class="input-group">
+          <input id="weight-value" class="form-control" placeholder="" [(ngModel)]="weightModel.value"
+            formControlName="value">
+        </div>
+        <label for="date">Date</label>
+        <div class="input-group">
+          <input id="date" class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="weightModel.date"
+            formControlName="date" ngbDatepicker #weightDate="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="weightDate.toggle()" type="button"><i
+                class="fa fa-calendar"></i></button>
           </div>
         </div>
-      </form>
+      </div>
+    </form>
+    <div *ngIf="id">
+      <p>Are you sure you  want to delete this entry for <strong>{{weight.date | date : 'longDate'}}</strong> ? </p>
     </div>
-    <div class="modal-footer">
-      <button [hidden]="" (mousedown)="addWeight()" (mouseup)="modal.close()"  class="btn btn-outline-dark">Save</button>
-      <button (mousedown)="updateWeight()" (mouseup)="modal.close()"  class="btn btn-outline-dark">Update</button>
-    </div>
-  </ng-template>  
-
-  <div class="row">
-    <button type="button" role="button" (click)="open(content)" class="btn btn-success"><i class="fa fa-plus"></i></button>
   </div>
+  <div class="modal-footer">
+    <button (click)="modal.close()" class="btn btn-outline-dark">Cancel</button>
+    <button *ngIf="!weight && !id" (mousedown)="addWeight()" (mouseup)="modal.close()" class="btn btn-outline-success">Save</button>
+    <button *ngIf="weight && !id" (mousedown)="updateWeight()" (mouseup)="modal.close()" class="btn btn-outline-info">Update</button>
+    <button *ngIf="weight && id" (mousedown)="deleteWeight()" (mouseup)="modal.close()" class="btn btn-outline-danger">Delete</button>
+  </div>
+</ng-template>
+
+<div class="row">
+  <button *ngIf="!weight && !id" type="button" role="button" (click)="open(content)" class="btn btn-success"><i
+      class="fa fa-plus"></i></button>
+  <button *ngIf=" weight && !id" type="button" role="button" (click)="open(content)" class="btn btn-info"><i
+      class="fa fa-edit"></i></button>
+  <button *ngIf="weight &&  id" type="button" role="button" (click)="open(content)" class="btn btn-danger"><i
+      class="fa fa-trash"></i></button>
+</div>
