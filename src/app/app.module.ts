@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -12,7 +12,6 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ViewWrapperComponent } from './view-wrapper/view-wrapper.component';
 import { ChartComponent } from './chart/chart.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +24,6 @@ import { HomeComponent } from './home/home.component';
       AppComponent,
       DashboardComponent,
       PageNotFoundComponent,
-      ViewWrapperComponent,
       ChartComponent,
       RegisterComponent,
       LoginComponent,
@@ -46,6 +44,7 @@ import { HomeComponent } from './home/home.component';
    providers: [],
    bootstrap: [
       AppComponent
-   ]
+   ],
+   schemas: [NO_ERRORS_SCHEMA],
 })
 export class AppModule { }

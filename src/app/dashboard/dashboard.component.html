@@ -1,44 +1,43 @@
-<div class="root">
-  <div class="row  m-md-3 mb-3">
-    <span class="col-sm-4 simple-nav">Hello, <strong>{{sessionHolder.email}}</strong></span>
-    <div class="col-sm-2 offset-4">
-      <button class="btn btn-primary " (click)="logout()">Logout</button>
+<div class="container-fluid wrapper">
+  <div class="root">
+    <div class="row  m-md-3 mb-3">
+      <span class="col-sm-4 simple-nav">Hello, <strong>{{sessionHolder.email}}</strong></span>
+      <button class="btn btn-primary col-sm-1 offset-sm-7" (click)="logout()">Logout</button>
     </div>
-    <div class="col-sm-2 side-notes">
-      <p>Powered by:</p>
-      <img src="./assets/tropical-keltic-logo.svg" class="logo  tropicla-keltic">
+    <div class="row m-md-3">
+      <h3 class="p-1 mb-4 section-title">Hallo und wilkommen!</h3>
+    </div>
+    <app-chart [user]="sessionHolder"></app-chart>
+    <div class="row m-md-3 mt-5">
+      <div class="offset-11 col">
+        <app-weight-modal (add)="addWeight($event)"></app-weight-modal>
       </div>
     </div>
-  <div class="row m-md-3">
-    <h3 class="p-1 mb-4 section-title">Hallo und wilkommen!</h3>
-  </div>
-  <app-chart [user]="sessionHolder"></app-chart>
-  <div class="row m-md-3 mt-5">
-    <div class="offset-11 col">
-      <app-weight-modal (add)="addWeight($event)"></app-weight-modal>
-    </div>
-  </div>
-  <div class="row m-md-3">
-    <h3 class="p-1  my-4 section-title">Your weight history: </h3>
-  </div>
-  <div class="row m-md-3">
-    <div class="card col round-edges pt-2">
-      <div *ngFor="let weight of weights" class="row m-2 data-line">
-        <div class="col">
-          <div class="row">
-            <div class="weight-value col-xs-4 col-4">
-              <p>{{weight.value | number : '1.1-1' }}</p>
-            </div>
-            <div class="date-value col-xs-5 col-5">
-              <p>{{weight.date | date : 'longDate'}}</p>
-            </div>
-            <div class="controls col-xs-3 col-3">
+    <div *ngIf="weigths && weights.length">
+      <div class="row m-md-3" >
+        <h3 class="p-1  my-4 section-title">Your weight history: </h3>
+      </div>
+      <div class="row m-md-3">
+        <div class="card col round-edges pt-2">
+          <div *ngFor="let weight of weights" class="row m-2 data-line">
+            <div class="col">
               <div class="row">
-                <div class="col d-flex justify-content-end px-4">
-                  <app-weight-modal [weight]="weight" (update)="updateWeight($event)"></app-weight-modal>
+                <div class="weight-value col-xs-4 col-4">
+                  <p>{{weight.value | number : '1.1-1' }}</p>
                 </div>
-                <div class="col d-flex justify-content-start">
-                  <app-weight-modal [id]="weight.id" [weight]="weight" (delete)="deleteWeight($event)"></app-weight-modal>
+                <div class="date-value col-xs-5 col-5">
+                  <p>{{weight.date | date : 'longDate'}}</p>
+                </div>
+                <div class="controls col-xs-3 col-3">
+                  <div class="row">
+                    <div class="col d-flex justify-content-end px-4">
+                      <app-weight-modal [weight]="weight" (update)="updateWeight($event)"></app-weight-modal>
+                    </div>
+                    <div class="col d-flex justify-content-start">
+                      <app-weight-modal [id]="weight.id" [weight]="weight" (delete)="deleteWeight($event)">
+                      </app-weight-modal>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
