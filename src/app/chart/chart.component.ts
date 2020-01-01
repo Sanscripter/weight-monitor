@@ -23,7 +23,7 @@ export class ChartComponent implements OnInit {
               private helperService: HelperService) { }
 
   public weightList: WeightModel[];
-  public chartWeightData: ChartDataSets[] = [{ data: [] }];
+  public chartWeightData: ChartDataSets[];
   public chartWeightLabels: Label[] = [];
 
   public chartWeightOptions: (ChartOptions) = {

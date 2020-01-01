@@ -1,5 +1,5 @@
 <div class="row chart-card card round-edges m-md-3">
-  <div *ngIf="chartWeightData" class="chart-container">
+  <div *ngIf="chartWeightData && chartWeightData.length; else noData" class="chart-container">
     <canvas baseChart
               [datasets]="chartWeightData" 
               [labels]="chartWeightLabels"
@@ -10,4 +10,10 @@
               [plugins]="chartWeightPlugins">
     </canvas>
   </div>
+  <ng-template #noData>
+    <div class="no-data-container">
+      <h1>You do not have data to display at the moment</h1>
+      <p>Press the <i class="fa fa-plus"></i> button to get your tracking started.</p>
+    </div>
+  </ng-template>
 </div>
