@@ -17,9 +17,8 @@ import { ChartComponent } from './chart/chart.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { GoalsViewComponent } from './goals-view/goals-view.component';
-import { GoalsComponent } from './goals-view/goals/goals.component';
 import { WeightModalComponent } from './weight-modal/weight-modal.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
    declarations: [
@@ -30,9 +29,8 @@ import { WeightModalComponent } from './weight-modal/weight-modal.component';
       ChartComponent,
       RegisterComponent,
       LoginComponent,
-      GoalsComponent,
-      GoalsViewComponent,
-      WeightModalComponent
+      WeightModalComponent,
+      HomeComponent
    ],
    imports: [
       BrowserModule,
