@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   public weights: WeightModel[];
   public sessionHolder: SessionHolderModel;
   private sessionSubscription: Subscription;
@@ -29,24 +29,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         return;
       }
       this.sessionHolder = value;
+      this.weightsService.getUserWeights(this.sessionHolder).subscribe(data => {
+        this.weights = data;
+      });
     });
-    this.weightsService.getUserWeights(this.sessionHolder).subscribe(data => {
-      this.weights = data;
-    });
-  }
-
-  ngAfterViewInit(): void {
-    //Populating with mocks....
-
-    // const newWeight = {
-    //   value: Math.random() * 100 + 70,
-    //   user: this.sessionHolder.email,
-    //   date: new Date(),
-    //   active: true
-    // };
-    // this.weightsService.add(newWeight);
-
-    //NOTE: I KNOW THIS IS UGLY I JUST WANT TO PUT IT ONLINE FOR TESTERS BUT DON'T WANT TO LOSE IT
   }
 
   ngOnDestroy() {
@@ -64,8 +50,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public addWeight(weight: WeightModel | any) {
-    weight.user = this.sessionHolder.email;
-    weight.date = moment(weight.date).toDate();
+    weight.active = true;
     this.weightsService.add(weight);
   }
 

@@ -10,10 +10,10 @@
     <app-chart [user]="sessionHolder"></app-chart>
     <div class="row m-md-3 mt-5">
       <div class="offset-11 col">
-        <app-weight-modal (add)="addWeight($event)"></app-weight-modal>
+        <app-weight-modal [session]="sessionHolder" (add)="addWeight($event)"></app-weight-modal>
       </div>
     </div>
-    <div *ngIf="weigths && weights.length">
+    <div *ngIf="weights && weights.length">
       <div class="row m-md-3" >
         <h3 class="p-1  my-4 section-title">Your weight history: </h3>
       </div>

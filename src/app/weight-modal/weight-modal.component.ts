@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } 
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { WeightModel } from '../models/weight-model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
+import { SessionHolderModel } from '../models/sessionholder-model';
 
 @Component({
   selector: 'app-weight-modal',
@@ -15,6 +17,8 @@ export class WeightModalComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   @Input() weight: WeightModel;
+
+  @Input() session: SessionHolderModel;
 
   @Input() id: string;
 
@@ -31,15 +35,6 @@ export class WeightModalComponent implements OnInit {
     if (this.weight) {
       this.weightModel = this.weight;
     }
-    this.initializeForm();
-  }
-
-  private initializeForm() {
-    this.weightForm = this.formBuilder.group({
-      value: ['', Validators.required],
-      date: ['', Validators.required],
-    });
-
   }
 
   public open(content) {
@@ -47,25 +42,34 @@ export class WeightModalComponent implements OnInit {
   }
 
   public addWeight() {
-    console.log(this.weightForm.valid);
-    if (this.weightForm.valid) {
-      this.add.emit(this.weightModel);
-      this.modalRef.close();
-    }
+    this.weightModel.date.month--; //"Feels weird starting at 0" ng-bootstrap Issue#728
+    this.weightModel.date = moment(this.weightModel.date).toDate();
+    this.weightModel.user = this.session.email;
+    this.add.emit(this.weightModel);
+    this.endInteraction();
   }
 
   public updateWeight() {
     if (this.weightForm.valid) {
       this.update.emit(this.weightModel);
-      this.modalRef.close();
+      this.endInteraction();
     }
   }
 
   public deleteWeight() {
     if (this.id) {
       this.delete.emit(this.id);
-      this.modalRef.close();
+      this.endInteraction();
     }
   }
 
+  public formatWeightValue(value) {
+    const stringValue = value.toString();
+    return stringValue.replace(/[^0-9\\.]+/g, '');
+  }
+
+  private endInteraction() {
+    this.weightModel = {};
+    this.modalRef.close();
+  }
 }
