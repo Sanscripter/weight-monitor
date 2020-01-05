@@ -23,7 +23,7 @@ export class ChartComponent implements OnInit {
               private helperService: HelperService) { }
 
   public weightList: WeightModel[];
-  public chartWeightData: ChartDataSets[];
+  public chartWeightData: ChartDataSets[] = [];
   public chartWeightLabels: Label[] = [];
 
   public chartWeightOptions: (ChartOptions) = {
@@ -65,6 +65,8 @@ export class ChartComponent implements OnInit {
   }
 
   private updateChart() {
+    //TODO: Handle color loss
+    this.chartWeightData[0] = {};
     this.chartWeightData[0].data = [];
     this.chartWeightLabels = [];
     this.weightList = this.weightList.sort((a, b) => this.helperService.sortByDate(a, b));
