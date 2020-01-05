@@ -9,17 +9,10 @@ import { AuthPass } from './shared/auth-pass';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, },
   { path: 'login', component: LoginComponent, canActivate: [AuthPass] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  // {
-  //   path: 'goals',
-  //   component: DashboardComponent,
-  //   data: {
-  //     title: 'Goals'
-  //   },
-  //   canActivate: [AuthGuard]
-  // },
+
   {
     data: {
       title: 'The last weight tracker you will ever need.',
